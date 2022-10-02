@@ -16,8 +16,8 @@
     })
 </script>
 <form on:submit|preventDefault={attend}>
-    <input type="text" bind:value={ctx}/>
-    <input type="number" bind:value={tkn}/>
+    <input type="text"   placeholder="contractID" bind:value={ctx}/>
+    <input type="number" placeholder="tokenID" bind:value={tkn}/>
     <button type="submit">SUBMIT</button>
 </form>
 {#if red}

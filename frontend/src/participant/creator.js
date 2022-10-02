@@ -12,7 +12,17 @@ stdlib.setWalletFallback(stdlib.walletFallback({
 
 export class Creator {
     constructor(){}
-    async deploy(){
+    async deploy(pr,tc,en,es,ur,me,ev,re){
+        this.event = {
+            price : stdlib.parseCurrency(pr),
+            tickets : tc,
+            eventName : en,
+            eventSymbol : es,
+            url:ur,
+            metadata:"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            evenTime:ev,
+            reserved:re
+            }
         console.log("DEPLOY CONTRACT")
         this.account = await stdlib.getDefaultAccount();
         this.contract = this.account.contract(backend)
@@ -20,16 +30,7 @@ export class Creator {
     }
     getParams (){
         console.log("GET PARAMS")
-        return {
-            price : ticketPrice,
-            tickets : 2,
-            eventName : "UBARN",
-            eventSymbol : "POTUS",
-            url:"https://asdf.com",
-            metadata:"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-            evenTime:100,
-            reserved:1
-            }
+        return this.event
     }
     async notify (ETOKEN,bl,sp) {
         console.log("NOTIFY")
