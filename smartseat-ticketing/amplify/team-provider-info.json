@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-smartseatticketing-dev-11114-authRole",
+      "UnauthRoleArn": "arn:aws:iam::040732739798:role/amplify-smartseatticketing-dev-11114-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::040732739798:role/amplify-smartseatticketing-dev-11114-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-smartseatticketing-dev-11114-deployment",
+      "UnauthRoleName": "amplify-smartseatticketing-dev-11114-unauthRole",
+      "StackName": "amplify-smartseatticketing-dev-11114",
+      "StackId": "arn:aws:cloudformation:us-east-1:040732739798:stack/amplify-smartseatticketing-dev-11114/22386340-4c0d-11ed-a20e-0ea4d4bf90fb",
+      "AmplifyAppId": "dkdptqpyzupxk"
+    }
+  }
+}
