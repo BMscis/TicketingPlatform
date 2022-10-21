@@ -40,8 +40,14 @@ export default function ToolBar(){
                                         <li><Link href="statistics.html">Statistics</Link></li>
                                         <li><Link href="ticket-section.html">Ticket Section</Link></li>
                                         <li><Link href="/Wallet">Wallet</Link></li>
-                                        <li><Link href="signup.html">Sign Up</Link></li>
-                                        <li><Link href="login.html">Login</Link></li>
+                                        <li><Link href={{
+                                            pathname:"/login",
+                                            query:{signup:"SU"}
+                                        }}>Sign Up</Link></li>
+                                        <li><Link href={{
+                                            pathname:"/login",
+                                            query:{signup:"LI"}
+                                        }}>Login</Link></li>
                                        
                                     </ul>
                                 </li>

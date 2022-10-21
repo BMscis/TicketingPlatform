@@ -1,0 +1,15 @@
+projects:
+  smartseatticketing:
+    schemaPath: amplify/backend/api/smartseatticketing/build/schema.graphql
+    includes:
+      - smartseat-ticketing/graphql/**/*.js
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: javascript
+        generatedFileName: ''
+        docsFilePath: smartseat-ticketing/graphql
+        region: us-east-1
+        apiId: null
+        maxDepth: 2

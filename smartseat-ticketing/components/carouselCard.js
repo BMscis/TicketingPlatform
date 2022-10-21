@@ -1,5 +1,5 @@
 export default function CarouselCard({props}){
-    const {source,image,title,active,cloned} = props
+    const {source,EVENTIMAGE,EVENTNAME,active,cloned} = props
     const regular = "owl-item"
     const actv = "owl-item active"
     const clond = "owl-item cloned"
@@ -15,11 +15,11 @@ export default function CarouselCard({props}){
             <a href="#"><img src={source} height={145} className="lazy img-fluid" alt=""/></a>
         </div>
         <div className="nft_coll_pp" style={{backgroundSize: "cover"}}>
-            <a href="#"><img className="lazy pp-coll" src={image} alt=""/></a>
+            <a href="#"><img className="lazy pp-coll" src={EVENTIMAGE} alt=""/></a>
             <i className="fa fa-check"></i>
         </div>
         <div className="nft_coll_info" style={{backgroundSize: "cover"}}>
-            <a href="#"><h4>{title}</h4></a>
+            <a href="#"><h4>{EVENTNAME}</h4></a>
         </div>
     </div>
 </div>

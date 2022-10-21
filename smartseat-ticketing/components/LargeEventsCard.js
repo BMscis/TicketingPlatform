@@ -38,14 +38,14 @@ export default function LargeEventsCard({buyer,props}) {
                         <th style={{borderBottom: "none"}}> </th>
                     </tr>
                         <tr>
-                            <th style={{borderBottom: "none"}}>  <h5>General Admission <br /> ${props.price}.00 Algos </h5></th>
+                            <th style={{borderBottom: "none"}}>  <h5>General Admission <br /> ${props.PRICE}.00 Algos </h5></th>
                             <th style={{borderBottom: "none"}}>  
                             <div name="" id="" className="form-control" style={{backgroundColor:"#444",color: "#fff",border: "none"}}>
                                 <input type="number" ref={tn} placeholder="Tickets Selected" style={{background: "transparent"}}/>
                             </div></th>
                         </tr>
                         <tr>
-                            <th style={{borderBottom: "none"}}>  <h5>GA- Lower Level <br /> ${props.price}.00 Algos </h5></th>
+                            <th style={{borderBottom: "none"}}>  <h5>GA- Lower Level <br /> ${props.PRICE}.00 Algos </h5></th>
                             <th style={{borderBottom: "none"}}>  
                             <div name="" id="" className="form-control" style={{backgroundColor:"#444",color: "#fff",border: "none"}}>
                             <input type="number" placeholder="Tickets Selected" style={{background: "transparent"}}/>

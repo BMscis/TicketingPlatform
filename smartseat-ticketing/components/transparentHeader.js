@@ -39,8 +39,14 @@ export default function TransparentHeader(){
                                             <li><a href="statistics.html">Statistics</a></li>
                                             <li><a href="ticket-section.html">Ticket Section</a> </li>
                                             <li><a href="/Wallet">Wallet</a></li>
-                                            <li><a href="signup.html">Sign Up</a></li>
-                                            <li><a href="login.html">Login</a></li>
+                                            <li><Link href={{
+                                            pathname:"/login",
+                                            query:{signup:"SU"}
+                                        }}>Sign Up</Link></li>
+                                        <li><Link href={{
+                                            pathname:"/login",
+                                            query:{signup:"LI"}
+                                        }}>Login</Link></li>
                                            
                                         </ul>
                                     </li>

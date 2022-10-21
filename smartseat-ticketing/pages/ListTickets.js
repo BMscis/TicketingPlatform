@@ -1,6 +1,12 @@
-import { useRef } from "react"
+import { useRouter } from "next/router"
+import { useRef, useState } from "react"
 import Main from "../components/Main"
+import { ReachContextHook } from "../context/CommonContext"
 export default function ListTickets ({props}){
+    const [imageURL, setImage] = useState(null)
+    const {awsUser} = ReachContextHook()
+    const [img, setImg] = useState(null)
+    const router = useRouter()
     const creator = props
     const nm = useRef()
     const tn = useRef()
@@ -11,15 +17,34 @@ export default function ListTickets ({props}){
     const tp = useRef()
     console.log("Login: ", creator)
 
+    if(!awsUser){
+        router.push({
+            pathname:"/login",
+            query:{signup:"LI"}
+        })
+    }
+
+    const imageFileHandler = async (e) => {
+        if(e.target.files.length == 0) return
+        const i = e.target.files[0]
+        setImage(URL.createObjectURL(i))
+        setImg(i)
+        console.log("IMAGE: ", i)
+    }
     const createEvent = async ()=>{
+        if(!creator.state.context.hasUser){
+            router.push("/Wallet")
+        }
         await creator.deploy(
+            awsUser.username,
             nm.current.value,
             tn.current.value,
             ts.current.value,
             ed.current.value,
             rs.current.value,
             lc.current.value,
-            tp.current.value
+            tp.current.value,
+            img
             )
     }
     return(
@@ -68,15 +93,29 @@ export default function ListTickets ({props}){
                     <p>Ticket Price</p>
                     <input type="number" ref={tp} name="username" id="username" className="form-control" placeholder="ALGO"/>
                 </div>
+                <div className="bcdiv" style={{backgroundSize: "cover",visibility:"hidden"}}>
+                    <p>PROCEED</p>
+                    <button onClick={()=>{createEvent()}} className="btn-main" id="btn">CREATE EVENT</button>
+                </div>
                 <div className="bcdiv" style={{backgroundSize: "cover"}}>
                     <p>Different sectioned tickets?</p>
                     <button className="btn-main" id="btn">yes</button>
                     <button className="btn-main" id="btn">no</button>
                 </div>
                 <div className="bcdiv" style={{backgroundSize: "cover"}}>
+                <p>Upload Event Promo Image</p>
+                <input className="form-control" type="file" accept="image/*" onChange={imageFileHandler} name="submit" style={{backgroundColor: "#18D8B3"}}/>
+                </div>
+                <div className="bcdiv" style={{backgroundSize: "cover",visibility:"hidden"}}>
                     <p>PROCEED</p>
                     <button onClick={()=>{createEvent()}} className="btn-main" id="btn">CREATE EVENT</button>
                 </div>
+                <div className="bcdiv" style={{backgroundSize: "cover"}}>
+                    <p>PROCEED</p>
+                    <button onClick={()=>{createEvent()}} className="btn-main" id="btn">CREATE EVENT</button>
+                </div>
+                <img src={imageURL} className="lazy nft__item_preview" placeholder="Upload Image"
+                style={{ left: "30px",top: "20%",width: "70%",margin:"20px",    borderRadius: "10%"}}></img>
             </div>
             <div className="container" style={{backgroundSize: "cover"}}>
                 <div className="row" style={{backgroundSize: "cover"}}>
@@ -84,6 +123,8 @@ export default function ListTickets ({props}){
                     </div>
                 </div>
                 <div className="row sequence" style={{backgroundSize: "cover"}}>
+                <div className="box" style={{backgroundSize: "cover"}}>
+                    </div>
                     <div className="box" style={{backgroundSize: "cover"}}>
                         <div className="pricing-s1 mb30" style={{backgroundSize: "cover"}}>
                             <div className="top" style={{backgroundSize: "cover"}}>
@@ -207,15 +248,6 @@ export default function ListTickets ({props}){
 
                         </div>
 
-                    </div>
-                    <div className="box" style={{backgroundSize: "cover"}}>
-                        <div className="pricing-s1 mb30" style={{backgroundSize: "cover"}}>
-                            <div className="top" style={{backgroundSize: "cover"}}>
-                                <h3>Upload Event Promo Image</h3>
-                                <br/>
-                                <button className="btn-main" type="submit" value="Upload Image" name="submit" style={{backgroundColor: "#18D8B3"}}>Upload Image</button>
-                            </div>
-                        </div>
                     </div>
                     <button className="btn-main" onClick={()=>{creator.deploy()}} style={{width:"70%", margin: "auto", backgroundColor: "#18D8B3"}}>List Tickets</button>
                 </div>

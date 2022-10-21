@@ -1,7 +1,9 @@
 import { ALGO_MyAlgoConnect as MyAlgoConnect } from '@reach-sh/stdlib';
 import { ALGO_WalletConnect as WalletConnect } from '@reach-sh/stdlib';
 import {loadStdlib} from '@reach-sh/stdlib'
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { getEvents, SendToStore } from '../data/event';
+import { GetImages } from '../storage/store';
 const stdlib = loadStdlib((process.env.REACH_CONNECTOR_MODE = "ALGO"))
 const setMode = (mode) => {
     switch (mode) {
@@ -15,19 +17,20 @@ const setMode = (mode) => {
         break;
     }
 }
+
 const uE = [
-    {location:"Morrison, CO",contractAddress:"xxxxx",tokenID:0,sold:0,remaining:0,price:1,
-    image:"images/upcoming/sub.jpeg",title:"Subtronics",active:false,cloned:false},
-    {location:"Columbus, OH",contractAddress:"xxxxx",tokenID:0,sold:0,remaining:0,price:1,
-    image:"images/upcoming/Sullivan.jpeg",title:"Sullivan King",active:true,cloned:false},
-    {location:"Grand Rapids, MI",contractAddress:"xxxxx",tokenID:0,sold:0,remaining:0,price:1,
-    image:"images/upcoming/Bass.jpeg",title:"Bass Country",active:true,cloned:false},
-    {location:"Wichita, KS", contractAddress:"xxxxxx",tokenID:0,sold:0,remaining:0,price:1,
-    image:"images/upcoming/Kai.jpeg",title:"Kai Wachi",active:true,cloned:false},
-    {location:"Chicago, IL", contractAddress:"xxxxxx",tokenID:0,sold:0,remaining:0,price:1,
-    image:"images/upcoming/Said.jpeg",title:"Said the Sky",active:true,cloned:false},
-    {location:"London", contractAddress:"{\"type\":\"BigNumber\",\"hex\":\"0x06ee0130\"}",tokenID:"116261225",sold:0,remaining:0,price:1,
-    image:"images/upcoming/Said.jpeg",title:"PRIDAT",active:true,cloned:false}
+    {EVENTLOCATION:"Morrison, CO",CONTRACTADDRESS:"xxxxx",TOKENID:0,TICKETSOLD:0,TICKETNUMBER:0,PRICE:1,
+    EVENTIMAGE:"images/upcoming/sub.jpeg",EVENTNAME:"Subtronics",active:false,cloned:false},
+    {EVENTLOCATION:"Columbus, OH",CONTRACTADDRESS:"xxxxx",TOKENID:0,TICKETSOLD:0,TICKETNUMBER:0,PRICE:1,
+    EVENTIMAGE:"images/upcoming/Sullivan.jpeg",EVENTNAME:"Sullivan King",active:true,cloned:false},
+    {EVENTLOCATION:"Grand Rapids, MI",CONTRACTADDRESS:"xxxxx",TOKENID:0,TICKETSOLD:0,TICKETNUMBER:0,PRICE:1,
+    EVENTIMAGE:"images/upcoming/Bass.jpeg",EVENTNAME:"Bass Country",active:true,cloned:false},
+    {EVENTLOCATION:"Wichita, KS", CONTRACTADDRESS:"xxxxxx",TOKENID:0,TICKETSOLD:0,TICKETNUMBER:0,PRICE:1,
+    EVENTIMAGE:"images/upcoming/Kai.jpeg",EVENTNAME:"Kai Wachi",active:true,cloned:false},
+    {EVENTLOCATION:"Chicago, IL", CONTRACTADDRESS:"xxxxxx",TOKENID:0,TICKETSOLD:0,TICKETNUMBER:0,PRICE:1,
+    EVENTIMAGE:"images/upcoming/Said.jpeg",EVENTNAME:"Said the Sky",active:true,cloned:false},
+    {EVENTLOCATION:"London", CONTRACTADDRESS:"{\"type\":\"BigNumber\",\"hex\":\"0x06ee0130\"}",TOKENID:"116261225",TICKETSOLD:0,TICKETNUMBER:0,PRICE:1,
+    EVENTIMAGE:"images/upcoming/Said.jpeg",EVENTNAME:"PRIDAT",active:true,cloned:false}
 ]
 export const ReachContext = createContext()
 export function ReachContextHook(){
@@ -35,9 +38,12 @@ export function ReachContextHook(){
 }
 export default function CommonContext ({children}){
     const [hasUser, SetUser] = useState(false)
-    const [contractAddress, setContractAddress] = useState(undefined)
+    const [cardImage, SetCardImage] = useState(null)
+    const [awsUser, SetAwsUser] = useState(false)
+    const [CONTRACTADDRESS, setContractAddress] = useState(undefined)
     const [contract, setContract] = useState(undefined)
-    const [upcomingEvent, setCurrentEvent] = useState({events : uE})
+    const [upcomingEvent, setCurrentEvent] = useState({events:[]})
+
     const login = async (mode) => {
         console.log("LOGIN")
         setMode(mode)
@@ -48,18 +54,37 @@ export default function CommonContext ({children}){
         }
         SetUser(newUser)
     }
+    const addEvents = async() =>{
+        console.log("GETTING FROM DB")
+        const evs = await getEvents()
+        const ar = []
+        console.log("EVENTS: ", evs)
+        Object.entries(evs).forEach(ev => {
+            ar.push(ev[1])
+        })
+        console.log("ARRAY: ", ar)
+        setCurrentEvent({events:evs})
+    }
+    const getCardImage = async(x) => {
+        const img = await GetImages(x)
+        SetCardImage(img)
+    }
     const createEvent = async (evn) => {
-        console.log("UPCOMING EVENTS: ", upcomingEvent.events)
-        const newEvn = upcomingEvent.events.push(evn)
-        //setCurrentEvent({events : newEvn})
-        console.log("UPC: ", upcomingEvent)
+
+        await SendToStore(evn)
+
     }
     const value = {
+        cardImage, getCardImage,
         hasUser,SetUser,
-        contractAddress,setContractAddress,
+        awsUser,SetAwsUser,
+        CONTRACTADDRESS,setContractAddress,
         contract,setContract,login,
-        upcomingEvent, createEvent,stdlib
+        upcomingEvent, createEvent,stdlib,addEvents
     }
+    useEffect(async ()=>{
+        await addEvents()
+    },[])
     return (
         <>
         <ReachContext.Provider value={value}>

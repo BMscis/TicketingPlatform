@@ -3536,6 +3536,8 @@ hr {
 }
 
 .form-border input[type=text],
+.form-border input[type=number],
+.form-border input[type=tel],
 .form-border textarea,
 .form-underline input[type=email],
 .form-border input[type=password],
@@ -3557,6 +3559,8 @@ hr {
 }
 
 .dark-scheme .form-border input[type=text],
+.form-border input[type=number],
+.form-border input[type=tel],
 .dark-scheme .form-border textarea,
 .dark-scheme .form-underline input[type=email],
 .dark-scheme .form-border input[type=password],
@@ -3581,6 +3585,8 @@ hr {
 }
 
 .form-border input[type=text]:focus,
+.form-border input[type=number]:focus,
+.form-border input[type=tel]:focus,
 .form-border textarea:focus,
 .form-underline input[type=email]:focus,
 .form-border input[type=date]:focus,
@@ -17056,6 +17062,7 @@ img {
     float: left;
     width: 30%;
     margin-left: 3%;
+    margin-bottom: 15px;
 }
 table {
     font-family: arial, sans-serif;

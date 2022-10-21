@@ -1,6 +1,7 @@
 import React, { Component, useContext} from "react"
 import * as backend from "../../build/index.main.mjs"
 import { ReachContext } from "../context/CommonContext.js"
+import { SendToS3 } from "../storage/store.js"
 import ListTickets from "./ListTickets.js"
 
 export const CreatorContext = React.createContext()
@@ -23,7 +24,7 @@ export default class CreatorClass extends Component {
         this.setState({
         context:context,
         event:{
-            price : 0,
+            PRICE : 0,
             tickets : 0,
             eventName : "",
             eventSymbol : "",
@@ -34,14 +35,17 @@ export default class CreatorClass extends Component {
         }
         })
     }
-    async deploy(nm,tn,ts,ed,rs,lc,tp) {
-        console.log("DEPLOY")
+    async deploy(un,nm,tn,ts,ed,rs,lc,tp,ei) {
+        console.log("DEPLOY: ", ei)
+        const {name} = ei
+        await SendToS3(ei)
         this.event ={
+            username : un,
             price : this.state.context.stdlib.parseCurrency(tp),
             tickets : tn,
             eventName : nm,
             eventSymbol : ts,
-            url:"image",
+            url:name,
             metadata:lc,
             evenTime:100,
             reserved:rs
@@ -74,18 +78,18 @@ export default class CreatorClass extends Component {
     ready (ETOKEN,ct){
         console.log("READY")
         console.log("DONE: ",JSON.stringify(ct))
-        const cEvent = {
-            location:this.event.metadata,
-            contractAddress:JSON.stringify(ct),
-            tokenID:this.state.context.stdlib.bigNumberToNumber(ETOKEN),
-            sold:this.balance,
-            remaining: this.supply,
-            image:"images/upcoming/Sullivan.jpeg",
-            title:this.event.eventName,
-            active:true,
-            cloned:false,
-            price:this.event.price
-        }
+        const cEvent = [
+            this.event.username,
+            this.state.context.hasUser.Account.networkAccount.addr,
+            JSON.stringify(ct),
+            this.state.context.stdlib.bigNumberToNumber(ETOKEN),
+            this.event.eventName,
+            this.event.metadata,
+            this.state.context.stdlib.bigNumberToNumber(this.event.price),
+            this.supply,
+            this.balance,
+            this.event.url,
+        ]
         this.state.context.createEvent(cEvent)
         this.state.context.setContractAddress(JSON.stringify(ct))
     }
@@ -101,8 +105,8 @@ export default class CreatorClass extends Component {
         this.setParams()
     }
     componentDidUpdate(){
-        if(this.state.context.contractAddress != 
-            this.context.contractAddress ||
+        if(this.state.context.CONTRACTADDRESS != 
+            this.context.CONTRACTADDRESS ||
             this.state.context.upcomingEvent != 
             this.context.upcomingEvent){
                 console.log("COMPONENT UPDATE")

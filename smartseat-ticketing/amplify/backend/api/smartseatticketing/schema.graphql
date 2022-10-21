@@ -1,0 +1,13 @@
+type EVENTS @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  AWSUSER: String
+  WALLETADDRESS: String
+  CONTRACTADDRESS: String
+  TOKENID: String
+  EVENTNAME: String
+  EVENTLOCATION: String
+  PRICE: Float
+  TICKETNUMBER: Int
+  TICKETSOLD: Int
+  EVENTIMAGE: String
+}

@@ -15,9 +15,9 @@ export default withRouter(class BuyerClass extends Component {
     async deploy(tn){
         try {
             await this.state.context.hasUser.Account.tokenAccept(
-                parseInt(this.state.event.tokenID)
+                parseInt(this.state.event.TOKENID)
             )
-            const ctx = JSON.parse(this.state.event.contractAddress)
+            const ctx = JSON.parse(this.state.event.CONTRACTADDRESS)
             this.contract = await this.state.context.hasUser.Account.
             contract(backend,ctx)
         } catch (error) {
