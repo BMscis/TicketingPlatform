@@ -1,9 +1,9 @@
-import Home from './Home'
+import ParentClass from './parent/ParentClass'
 export default function App() {
   console.log("INDEX")
   return (
     <>
-    <Home></Home>
+    <ParentClass></ParentClass>
     </>
   )
 }

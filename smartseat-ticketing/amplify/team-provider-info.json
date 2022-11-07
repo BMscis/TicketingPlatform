@@ -13,7 +13,20 @@
     },
     "categories": {
       "auth": {
-        "smartseatticketing": {}
+        "smartseatticketing": {},
+        "true": {}
+      },
+      "storage": {
+        "smartseatticketing039d9423": {
+          "bucketName": "smartseatstorage11114-dev",
+          "region": "us-east-1"
+        }
+      },
+      "function": {
+        "S3Triggerbb449fd6": {
+          "deploymentBucketName": "amplify-smartseatticketing-dev-11114-deployment",
+          "s3Key": "amplify-builds/S3Triggerbb449fd6-55614a51767662327263-build.zip"
+        }
       }
     }
   }

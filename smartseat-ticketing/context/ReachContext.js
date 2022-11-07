@@ -25,12 +25,12 @@ const setMode = (mode) => {
     }
 }
 export default function ReachAuthContextProvider({children}){
-    console.log("REACHCONTEXTPROVIDER")
+    //console.log("REACHCONTEXTPROVIDER")
     const [currentUser, setCurrentUser] = useState()
     const [params, setParams] = useState({contractID:"",tokenID:0})
     const [hasUser, setUser] = useState(false)
     const login = async (mode) =>  {
-        console.log("LOGIN IN")
+        //console.log("LOGIN IN")
         setMode(mode)
 
         const acc = await stdlib.getDefaultAccount()
@@ -38,12 +38,12 @@ export default function ReachAuthContextProvider({children}){
             "Account":acc,
             "Balance":await stdlib.balanceOf(acc)
         }
-        console.log("NEW USER: ", newUser)
+        //console.log("NEW USER: ", newUser)
         setCurrentUser(newUser)
         setUser(true)
     }
     const changeParams = (a,j) => {
-        console.log("CHANGEPARAMS")
+        //console.log("CHANGEPARAMS")
         setParams({contractID:a,tokenID:j})
     }
       const value = {

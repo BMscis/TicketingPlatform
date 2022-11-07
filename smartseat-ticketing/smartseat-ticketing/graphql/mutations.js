@@ -2,10 +2,7 @@
 // this is an auto generated file. This will be overwritten
 
 export const createEVENTS = /* GraphQL */ `
-  mutation CreateEVENTS(
-    $input: CreateEVENTSInput!
-    $condition: ModelEVENTSConditionInput
-  ) {
+  mutation CreateEVENTS{
     createEVENTS(input: $input, condition: $condition) {
       id
       AWSUSER
@@ -18,6 +15,8 @@ export const createEVENTS = /* GraphQL */ `
       TICKETNUMBER
       TICKETSOLD
       EVENTIMAGE
+      EVENTDETAILS
+      ARTISTS
       createdAt
       updatedAt
       _version
@@ -43,6 +42,8 @@ export const updateEVENTS = /* GraphQL */ `
       TICKETNUMBER
       TICKETSOLD
       EVENTIMAGE
+      EVENTDETAILS
+      ARTISTS
       createdAt
       updatedAt
       _version
@@ -68,6 +69,8 @@ export const deleteEVENTS = /* GraphQL */ `
       TICKETNUMBER
       TICKETSOLD
       EVENTIMAGE
+      EVENTDETAILS
+      ARTISTS
       createdAt
       updatedAt
       _version

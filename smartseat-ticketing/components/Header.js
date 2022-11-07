@@ -4,7 +4,7 @@ export default function Header(){
         <>
 <Head>
 <title>Home | SmartSeat App</title>
-<link rel="icon" href="images/logo.webp" type="image/gif" sizes="16x16"/>
+<link rel="icon" href="../images/logo.webp" type="image/gif" sizes="16x16"/>
 <meta content="text/htmlcharset=utf-8" httpEquiv="Content-Type"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <meta content="Gigaland - NFT Marketplace Website Template" name="description" />

@@ -2,9 +2,19 @@ import { ALGO_MyAlgoConnect as MyAlgoConnect } from '@reach-sh/stdlib';
 import { ALGO_WalletConnect as WalletConnect } from '@reach-sh/stdlib';
 import {loadStdlib} from '@reach-sh/stdlib'
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { getEvents, SendToStore } from '../data/event';
+import { getEvents, SendToStore, UpdateEvent } from '../data/event';
+import { mkRPC }      from '@reach-sh/rpc-client';
+import Timeout        from 'await-timeout';
 import { GetImages } from '../storage/store';
+import TestAccount from '../calls/fetchTestAccount';
 const stdlib = loadStdlib((process.env.REACH_CONNECTOR_MODE = "ALGO"))
+const opts = {
+    host:"localhost",
+    port:3000,
+    key:"opensesame",
+    verify:"0"
+  }
+
 const setMode = (mode) => {
     switch (mode) {
         case "WalletConnect":
@@ -18,20 +28,6 @@ const setMode = (mode) => {
     }
 }
 
-const uE = [
-    {EVENTLOCATION:"Morrison, CO",CONTRACTADDRESS:"xxxxx",TOKENID:0,TICKETSOLD:0,TICKETNUMBER:0,PRICE:1,
-    EVENTIMAGE:"images/upcoming/sub.jpeg",EVENTNAME:"Subtronics",active:false,cloned:false},
-    {EVENTLOCATION:"Columbus, OH",CONTRACTADDRESS:"xxxxx",TOKENID:0,TICKETSOLD:0,TICKETNUMBER:0,PRICE:1,
-    EVENTIMAGE:"images/upcoming/Sullivan.jpeg",EVENTNAME:"Sullivan King",active:true,cloned:false},
-    {EVENTLOCATION:"Grand Rapids, MI",CONTRACTADDRESS:"xxxxx",TOKENID:0,TICKETSOLD:0,TICKETNUMBER:0,PRICE:1,
-    EVENTIMAGE:"images/upcoming/Bass.jpeg",EVENTNAME:"Bass Country",active:true,cloned:false},
-    {EVENTLOCATION:"Wichita, KS", CONTRACTADDRESS:"xxxxxx",TOKENID:0,TICKETSOLD:0,TICKETNUMBER:0,PRICE:1,
-    EVENTIMAGE:"images/upcoming/Kai.jpeg",EVENTNAME:"Kai Wachi",active:true,cloned:false},
-    {EVENTLOCATION:"Chicago, IL", CONTRACTADDRESS:"xxxxxx",TOKENID:0,TICKETSOLD:0,TICKETNUMBER:0,PRICE:1,
-    EVENTIMAGE:"images/upcoming/Said.jpeg",EVENTNAME:"Said the Sky",active:true,cloned:false},
-    {EVENTLOCATION:"London", CONTRACTADDRESS:"{\"type\":\"BigNumber\",\"hex\":\"0x06ee0130\"}",TOKENID:"116261225",TICKETSOLD:0,TICKETNUMBER:0,PRICE:1,
-    EVENTIMAGE:"images/upcoming/Said.jpeg",EVENTNAME:"PRIDAT",active:true,cloned:false}
-]
 export const ReachContext = createContext()
 export function ReachContextHook(){
     return useContext(ReachContext)
@@ -45,7 +41,7 @@ export default function CommonContext ({children}){
     const [upcomingEvent, setCurrentEvent] = useState({events:[]})
 
     const login = async (mode) => {
-        console.log("LOGIN")
+        //const {rpc, rpcCallbacks} = await mkRPC(opts);
         setMode(mode)
         const acc = await stdlib.getDefaultAccount()
         const newUser = {
@@ -55,19 +51,34 @@ export default function CommonContext ({children}){
         SetUser(newUser)
     }
     const addEvents = async() =>{
-        console.log("GETTING FROM DB")
         const evs = await getEvents()
         const ar = []
         console.log("EVENTS: ", evs)
         Object.entries(evs).forEach(ev => {
             ar.push(ev[1])
         })
-        console.log("ARRAY: ", ar)
         setCurrentEvent({events:evs})
     }
-    const getCardImage = async(x) => {
-        const img = await GetImages(x)
-        SetCardImage(img)
+    const updateEvent = async(id,val)=> {
+        await UpdateEvent(id,val)
+    }
+    const getCardImage = async(x,y,z,e=0,v=0) => {
+        switch (z) {
+            case "event":
+                const eImg = await GetImages(x)
+                y(eImg) 
+                break;
+            case "artist":
+                const aImg = await GetImages(x)
+                if(e.length <= 1)y([{...e[v],artistImg: aImg}])
+                else y([...e,{...e[v],artistImg: aImg}])
+                break
+            case "location":
+                const lImg = await GetImages(e.LocationImageName)
+                y(prev => ({...prev,LocationImg: lImg}))
+                break
+        }
+        
     }
     const createEvent = async (evn) => {
 
@@ -80,10 +91,11 @@ export default function CommonContext ({children}){
         awsUser,SetAwsUser,
         CONTRACTADDRESS,setContractAddress,
         contract,setContract,login,
-        upcomingEvent, createEvent,stdlib,addEvents
+        upcomingEvent, createEvent,stdlib,addEvents,
+        updateEvent
     }
-    useEffect(async ()=>{
-        await addEvents()
+    useEffect(()=>{
+        addEvents()
     },[])
     return (
         <>

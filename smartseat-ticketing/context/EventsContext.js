@@ -13,13 +13,13 @@ const uE = [
 ]
 
 export default function EventsContextProvider({children}){
-    console.log("EventsContextProvider")
+    //console.log("EventsContextProvider")
     const [upcomingEvent, setCurrentEvent] = useState({events : uE})
     const createEvent = async (evn) => {
-        console.log("UPCOMING EVENTS: ", upcomingEvent.events)
+        //console.log("UPCOMING EVENTS: ", upcomingEvent.events)
         const newEvn = upcomingEvent.events.push(evn)
         setCurrentEvent(newEvn)
-        console.log("UPC: ", upcomingEvent)
+        //console.log("UPC: ", upcomingEvent)
     }
       const value = {
         upcomingEvent,

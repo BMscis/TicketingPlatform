@@ -9,17 +9,17 @@ export default function ConfirmSignUp(){
     const cd = useRef()
     const em = useRef()
     async function confirm () {
-        console.log("Confirm:")
+        //console.log("Confirm:")
         const username = em.current.value
         const code = cd.current.value
         try {
             const { confirmation } = await Auth.confirmSignUp(username, code);
-            console.log(confirmation);
+            //console.log(confirmation);
             router.push("/Home")
 
         } catch (error) {
-            console.log('error signing up:', error.code);
-            console.log('error signing up:', error.message);
+            //console.log('error signing up:', error.code);
+            //console.log('error signing up:', error.message);
         }
     }
     return (

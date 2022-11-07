@@ -20,6 +20,8 @@ export declare class EVENTS {
   readonly TICKETNUMBER?: number | null;
   readonly TICKETSOLD?: number | null;
   readonly EVENTIMAGE?: string | null;
+  readonly EVENTDETAILS?: string | null;
+  readonly ARTISTS?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<EVENTS, EVENTSMetaData>);

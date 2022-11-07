@@ -36,7 +36,8 @@
         "signupAttributes": [
           "EMAIL",
           "PHONE_NUMBER",
-          "NAME"
+          "NAME",
+          "PICTURE"
         ],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,
@@ -58,10 +59,27 @@
     }
   },
   "storage": {
-    "s3smartseatstorage": {
+    "sse": {
       "service": "S3",
       "providerPlugin": "awscloudformation",
-      "dependsOn": []
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "S3Triggerbb449fd6",
+          "attributes": [
+            "Name",
+            "Arn",
+            "LambdaExecutionRole"
+          ]
+        }
+      ]
+    }
+  },
+  "function": {
+    "S3Triggerbb449fd6": {
+      "service": "Lambda",
+      "providerPlugin": "awscloudformation",
+      "build": true
     }
   }
 }

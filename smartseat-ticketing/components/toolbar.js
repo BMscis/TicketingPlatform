@@ -11,8 +11,8 @@ export default function ToolBar(){
                             <div className="de-flex-col">
                                 {/* <!-- logo begin --> */}
                                 <div id="logo">
-                                    <a href="/Home">
-                                        <img alt="" src="images/logo.webp" />
+                                    <a href="/parent/ParentClass">
+                                        <img alt="" src="../images/logo.webp" />
                                     </a>
                                 </div>
                                 {/* <!-- logo close --> */}
@@ -25,7 +25,7 @@ export default function ToolBar(){
                             {/* <!-- mainmenu begin --> */}
                             <ul id="mainmenu">
                                 <li>
-                                    <Link href="/Home">Home</Link>
+                                    <Link href="/parent/ParentClass">Home</Link>
                                     
                                 </li>
                                 <li>
@@ -33,21 +33,15 @@ export default function ToolBar(){
                                     <ul>
                                         <li><Link href="view-tickets.html">View Tickets</Link></li>
                                         <li><Link href="ticket-details.html">Ticket Details</Link></li>
-                                        <li><Link href="/CreatorClass">List Ticket</Link></li>
+                                        <li><Link href="/Creator/CreateEvent">List Ticket</Link></li>
                                         <li><Link href="place-bid.html">Place Bid</Link></li>
                                         <li><Link href="profile-page.html">Profile</Link></li>
                                         <li><Link href="item-price.html">Item Price</Link></li>
                                         <li><Link href="statistics.html">Statistics</Link></li>
                                         <li><Link href="ticket-section.html">Ticket Section</Link></li>
                                         <li><Link href="/Wallet">Wallet</Link></li>
-                                        <li><Link href={{
-                                            pathname:"/login",
-                                            query:{signup:"SU"}
-                                        }}>Sign Up</Link></li>
-                                        <li><Link href={{
-                                            pathname:"/login",
-                                            query:{signup:"LI"}
-                                        }}>Login</Link></li>
+                                        <li><Link href={{pathname:"/login",query:{signup:"SU"}}}>Sign Up</Link></li>
+                                        <li><Link href={{pathname:"/login",query:{signup:"LI"}}}>Login</Link></li>
                                        
                                     </ul>
                                 </li>

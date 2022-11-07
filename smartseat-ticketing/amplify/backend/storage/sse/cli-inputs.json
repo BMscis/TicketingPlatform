@@ -1,0 +1,16 @@
+{
+  "resourceName": "sse",
+  "policyUUID": "7f7de941",
+  "bucketName": "sse",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "S3Triggerbb449fd6",
+  "groupAccess": {}
+}

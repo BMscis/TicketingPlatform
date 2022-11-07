@@ -1,0 +1,19 @@
+{
+  "name": "rpc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --experimental-modules --unhandled-rejections=strict --trace-warnings index.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@reach-sh/rpc-client": "0.0.2-rc.0",
+    "chalk": "5.0.0",
+    "await-timeout": "^0.6.0",
+    "axios": "^1.1.3"
+  }
+}

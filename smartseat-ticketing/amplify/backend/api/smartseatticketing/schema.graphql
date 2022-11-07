@@ -10,4 +10,7 @@ type EVENTS @model @auth(rules: [{allow: public}]) {
   TICKETNUMBER: Int
   TICKETSOLD: Int
   EVENTIMAGE: String
+  EVENTDETAILS: AWSJSON
+  ARTISTS: AWSJSON
 }
+ 

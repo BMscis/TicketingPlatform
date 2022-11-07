@@ -1,11 +1,13 @@
-import Main from '../components/Main'
 import WalletCard from '../components/walletCard'
 import Link from 'next/link'
 import { ReachContextHook } from '../context/CommonContext'
+import { useRouter } from 'next/router'
+import Main from '../components/Main'
 
 export default function Wallet() {
-  console.log("WALLET")
+  //console.log("WALLET")
   const {hasUser,login} = ReachContextHook()
+  const router = useRouter()
   const wallets = [
     {image:"images/wallet/9.png", title:"MyAlgo",span:"Active",active:true,login,
     description:"Start exploring blockchain applications in seconds.  Trusted by over 1 million users worldwide."},
@@ -24,8 +26,10 @@ export default function Wallet() {
     {image:"images/wallet/8.png", title:"Torus",span:"Most Simple",active:false,login,
     description:"Open source protocol for connecting decentralised applications to mobile wallets."},
 ]
+if(hasUser){
+    router.back()
+}
   return (
-<>
 <Main>
 {/* <!-- section begin --> */}
 <section id="subheader" className="text-light" style={{backgroundColor: "black"}}>
@@ -55,7 +59,5 @@ export default function Wallet() {
     </div>
 </section>
 </Main>  
-{/* <script src="./js/plugins.js"></script> */}
-</>
-  )
+)
 }

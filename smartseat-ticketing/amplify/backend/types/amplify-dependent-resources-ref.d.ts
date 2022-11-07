@@ -19,9 +19,17 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "storage": {
-        "s3smartseatstorage": {
+        "sse": {
             "BucketName": "string",
             "Region": "string"
+        }
+    },
+    "function": {
+        "S3Triggerbb449fd6": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
         }
     }
 }

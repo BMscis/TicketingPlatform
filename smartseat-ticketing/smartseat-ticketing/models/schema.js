@@ -80,6 +80,20 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "EVENTDETAILS": {
+                    "name": "EVENTDETAILS",
+                    "isArray": false,
+                    "type": "AWSJSON",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "ARTISTS": {
+                    "name": "ARTISTS",
+                    "isArray": false,
+                    "type": "AWSJSON",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -125,5 +139,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "d64ba9124d605124661db0ad5cb90a15"
+    "version": "43a125584fbf6d484bc13eab064975a1"
 };

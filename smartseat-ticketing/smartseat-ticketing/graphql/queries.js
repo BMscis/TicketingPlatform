@@ -15,6 +15,8 @@ export const getEVENTS = /* GraphQL */ `
       TICKETNUMBER
       TICKETSOLD
       EVENTIMAGE
+      EVENTDETAILS
+      ARTISTS
       createdAt
       updatedAt
       _version
@@ -42,6 +44,8 @@ export const listEVENTS = /* GraphQL */ `
         TICKETNUMBER
         TICKETSOLD
         EVENTIMAGE
+        EVENTDETAILS
+        ARTISTS
         createdAt
         updatedAt
         _version
@@ -78,6 +82,8 @@ export const syncEVENTS = /* GraphQL */ `
         TICKETNUMBER
         TICKETSOLD
         EVENTIMAGE
+        EVENTDETAILS
+        ARTISTS
         createdAt
         updatedAt
         _version

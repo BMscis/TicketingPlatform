@@ -11,7 +11,7 @@ export default function TransparentHeader(){
                                     {/* <!-- logo begin --> */}
                                     <div id="logo">
                                         <a href="/">
-                                            <img alt="" src="images/logo.webp" />
+                                            <img alt="" src="../images/logo.webp" />
                                         </a>
                                     </div>
                                     {/* <!-- logo close --> */}

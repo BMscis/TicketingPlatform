@@ -16,19 +16,21 @@ import { EVENTS } from '../smartseat-ticketing/models';
 // 	})
 // );
 export async function SendToStore(us){
-    console.log("ADDING TO DB: ", us)
+    //console.log("ADDING TO DB: ", us)
     await DataStore.save(
         new EVENTS({
-            "AWSUSER": us[0],
-            "WALLETADDRESS": us[1],
-            "CONTRACTADDRESS": us[2],
-            "TOKENID": JSON.stringify(us[3]),
-            "EVENTNAME": us[4],
-            "EVENTLOCATION": us[5],
-            "PRICE": us[6],
-            "TICKETNUMBER": us[7],
-            "TICKETSOLD": us[8],
-            "EVENTIMAGE": us[9],
+            "AWSUSER": us.AWSUSER,
+            "WALLETADDRESS": us.WALLETADDRESS,
+            "CONTRACTADDRESS": us.CONTRACTADDRESS,
+            "TOKENID": us.TOKENID,
+            "EVENTNAME": us.EVENTNAME,
+            "EVENTLOCATION": us.EVENTLOCATION,
+            "PRICE": JSON.parse(us.PRICE),
+            "TICKETNUMBER": JSON.parse(us.TICKETNUMBER),
+            "TICKETSOLD": JSON.parse(us.TICKETSOLD),
+            "EVENTIMAGE": us.EVENTIMAGE,
+            "EVENTDETAILS":JSON.stringify(us.EVENTDETAILS),
+            "ARTISTS":JSON.stringify(us.ARTISTS)
         })
     );
 }
@@ -42,9 +44,24 @@ export async function SendToStore(us){
 // const modelToDelete = await DataStore.query(EVENTS, 123456789);
 // DataStore.delete(modelToDelete);
 
+export async function UpdateEvent(id,tokenSold){
+    try {
+        const original = await DataStore.query(EVENTS, id);
+        /* Models in DataStore are immutable. To update a record you must use the copyOf function
+        to apply updates to the item’s fields rather than mutating the instance directly */
+        let ds = await DataStore.save(EVENTS.copyOf(original, item => {
+            item.TICKETSOLD = tokenSold
+        // Update the values on {item} variable to update DataStore entry
+        }));
+        //consologger("nftCardMutations.js","UPDATE CARD AFTER", ds)
+    } catch (error) {
+        console.log("UPDATE NFT ERROR: ", error)
+    }
+}
+
 export async function getEvents(){
     const models = await DataStore.query(EVENTS);
-    console.log("MODELS: ", models)
+    //console.log("MODELS: ", models)
     return models
 }
-// console.log(models);
+// //console.log(models);

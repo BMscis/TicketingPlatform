@@ -66,7 +66,7 @@ export default function Footer(){
                         <div className="de-flex">
                             <div className="de-flex-col">
                                 <a href="#">
-                                    <img alt="" className="f-logo" src="images/logo.webp" /><span className="copy">&copy Copyright 2022 - SmartSeat Media LLC</span>
+                                    <img alt="" className="f-logo" src="../images/logo.webp" /><span className="copy">&copy Copyright 2022 - SmartSeat Media LLC</span>
                                 </a>
                             </div>
                             <div className="de-flex-col">

@@ -2,30 +2,34 @@ import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
 import { ReachContextHook } from '../context/CommonContext';
+import Link from 'next/link';
 
 export default function SignIn(){
+    //console.log("SIGNUP: ")
     const {awsUser,SetAwsUser} = ReachContextHook()
     const router = useRouter()
+    //console.log({router})
     const nm = useRef()
     const em = useRef()
     const ps = useRef()
     const pn = useRef()
     async function sIn () {
-        console.log("Click:")
+        //console.log("Click:")
         const username = em.current.value
         const password = ps.current.value
         try {
             const user = await Auth.signIn(username,password);
-            console.log(user);
+            //console.log(user);
             if(user){
-                router.push({
-                    pathname:"/Home"
-                })
                 SetAwsUser(user)
+                // router.push({
+                //     pathname:"/Home"
+                // })
+                router.back()
             }
         } catch (error) {
-            console.log('error signing up:', error.code);
-            console.log('error signing up:', error.message);
+            //console.log('error signing up:', error.code);
+            //console.log('error signing up:', error.message);
         }
     }
     return (
@@ -55,6 +59,11 @@ className="btn btn-main btn-fullwidth color-2" style={{backgroundColor: "#18D8B3
 <li>Login with:</li>
 <li><a style={{color:"#18D8B3"}} href="#">Facebook</a></li>
 <li><a style={{color:"#18D8B3"}} href="#">Google</a></li>
+</ul>
+<br/>
+<ul className="list s3">
+<li>Don't have an account ?</li>
+<li><Link style={{color:"#18D8B3"}} href={{pathname:"/login",query:{signup:"SU"}}}>Sign UP</Link></li>
 </ul>
 </div>
 </div>

@@ -2,8 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateEVENTS = /* GraphQL */ `
-  subscription OnCreateEVENTS {
-    onCreateEVENTS {
+  subscription OnCreateEVENTS($filter: ModelSubscriptionEVENTSFilterInput) {
+    onCreateEVENTS(filter: $filter) {
       id
       AWSUSER
       WALLETADDRESS
@@ -15,6 +15,8 @@ export const onCreateEVENTS = /* GraphQL */ `
       TICKETNUMBER
       TICKETSOLD
       EVENTIMAGE
+      EVENTDETAILS
+      ARTISTS
       createdAt
       updatedAt
       _version
@@ -37,6 +39,8 @@ export const onUpdateEVENTS = /* GraphQL */ `
       TICKETNUMBER
       TICKETSOLD
       EVENTIMAGE
+      EVENTDETAILS
+      ARTISTS
       createdAt
       updatedAt
       _version
@@ -59,6 +63,8 @@ export const onDeleteEVENTS = /* GraphQL */ `
       TICKETNUMBER
       TICKETSOLD
       EVENTIMAGE
+      EVENTDETAILS
+      ARTISTS
       createdAt
       updatedAt
       _version

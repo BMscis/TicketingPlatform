@@ -3,7 +3,7 @@
   "cognitoConfig": {
     "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": true,
-    "resourceNameTruncated": "smarts0fc713a9",
+    "resourceNameTruncated": "smartsb801fbe9",
     "userPoolName": "smartseatticketing",
     "autoVerifiedAttributes": [
       "email"
@@ -27,16 +27,17 @@
     "requiredAttributes": [
       "email",
       "phone_number",
-      "name"
+      "name",
+      "picture"
     ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "smarts0fc713a9_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "smartsb801fbe9_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "0fc713a9",
+    "sharedId": "b801fbe9",
     "resourceName": "smartseatticketing",
     "authSelections": "identityPoolAndUserPool",
     "serviceName": "Cognito",
@@ -64,6 +65,7 @@
       ]
     },
     "breakCircularDependency": true,
-    "dependsOn": []
+    "dependsOn": [],
+    "hostedUI": false
   }
-}
+} 

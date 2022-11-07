@@ -22,21 +22,21 @@ export default function login(){
             sp = <SignUp></SignUp>
             break;
     }
-    console.log("Signup: ", signup)
+    //console.log("Signup: ", signup)
     return (
         <Main>
-            <div className="overlay-gradient t50" style={{backgroundSize: "cover"}}>
-					<div className="center-y relative" style={{backgroundSize: "cover"}}>
-						<div className="container" style={{backgroundSize: "cover"}}>
-							<div className="row align-items-center" style={{backgroundSize: "cover"}}>
-								<div className="col-lg-6 offset-lg-3 wow fadeIn animated" data-wow-delay=".5s" 
-                                style={{backgroundSize: "cover", visibility: "visible", animationDelay: "0.5s", animationName: "fadeIn"}}>
-                                    {sp}
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+        <div className="overlay-gradient t50" style={{backgroundSize: "cover"}}>
+            <div className="center-y relative" style={{backgroundSize: "cover"}}>
+                <div className="container" style={{backgroundSize: "cover"}}>
+                    <div className="row align-items-center" style={{backgroundSize: "cover"}}>
+                        <div className="col-lg-6 offset-lg-3 wow fadeIn animated" data-wow-delay=".5s" 
+                        style={{backgroundSize: "cover", visibility: "visible", animationDelay: "0.5s", animationName: "fadeIn"}}>
+                            {sp}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         </Main>
     )
 }

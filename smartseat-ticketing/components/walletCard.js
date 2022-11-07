@@ -2,7 +2,7 @@
 export default function WalletCard({props}){
     const {image, title,span,description,active,login} = props
     const classType = active ? "col-lg-3 mb30 active" : "col-lg-3 mb30"
-    console.log("TITLE: ", title)
+    //console.log("TITLE: ", title)
     return (
         <>
         <div className={classType}>

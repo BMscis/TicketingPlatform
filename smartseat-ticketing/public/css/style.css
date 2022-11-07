@@ -78,7 +78,9 @@ body .owl-stage .owl-item {
     margin-bottom: 15px;
 
 }
-
+.owl-item:hover {
+    cursor: pointer;
+}
 #wrapper {
     overflow: hidden;
 }
@@ -11431,7 +11433,7 @@ section.no-padding {
     font-size: 14px;
 }
 
-.form-control:focus {
+#form-control:focus {
     box-shadow: none;
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
@@ -17046,7 +17048,6 @@ img {
 .bcdiv{
     float: left;
     width: 30%;
-    margin-left: 3%;
 }
 table {
     font-family: arial, sans-serif;
@@ -17064,9 +17065,10 @@ table {
     margin: auto;
     padding: 1%;
 }
-.form-control{
+#form-control{
     background-color: #161D30;
     text-align: center;
+    color:wheat
 }
 #btn{
     background-color: #161D30;

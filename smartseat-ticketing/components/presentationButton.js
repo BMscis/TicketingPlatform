@@ -1,7 +1,13 @@
+import { ReachContextHook } from "../context/CommonContext"
+import { windowHook } from "../context/Dimensions"
+import { dimensionHook } from "../context/SetDimension"
 
 export default function PresentationButton(props){
-    const {direction,width,height,getDim,eventNum} = props
-
+    const {direction} = props
+    const { upcomingEvent } = ReachContextHook()
+    const {width,height} = windowHook()
+    const {getDim} = dimensionHook()
+    const eventNum = upcomingEvent.events.length
     const pos = direction == "left" ?  "owl-prev" : "owl-next"
     const dir = direction == "left" ?  "fa fa-chevron-left" : "fa fa-chevron-right"
     let po = -1
